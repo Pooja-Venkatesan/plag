@@ -66,7 +66,7 @@ def findSimilarity(text):
     prevlink = ''
     for link in output:
         percentage = (output[link]*c[link]*100)/numqueries
-        # percentage = round(percentage, 2)
+        percentage = round(percentage, 2)
         if percentage > 10:
             totalPercent = totalPercent + percentage
             prevlink = link
