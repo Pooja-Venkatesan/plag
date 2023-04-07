@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from django.shortcuts import render
 from django.http import HttpResponse
 from plagiarismchecker.algorithm import main
@@ -11,10 +12,9 @@ def home(request):
     return render(request, 'pc/index.html') 
 
 
-
 #web search(Text)
 def test(request):
-    print("request is welcome test")
+    # print("request is welcome test")
     print(request.POST['q'])  
     
     if request.POST['q']: 
@@ -40,7 +40,7 @@ def filetest(request):
         pdfFileObj = open(request.FILES['docfile'], 'rb') 
 
         # creating a pdf reader object 
-        pdfReader = PyPDF2.PdfFileReader(pdfFileObj) 
+        pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 
         # printing number of pages in pdf file 
         print(pdfReader.numPages) 
