@@ -128,10 +128,11 @@
         </ul>
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="text-input-ws" role="tabpanel" aria-labelledby="text-tab">          
-            <form id="form1-ws" action="/test/" method="POST">
+            <form id="form1-ws" action="/test/#taru" method="POST">
               {% csrf_token %}               
-              <textarea id="text-1" name="q" placeholder="Copy Paste the text here.." required></textarea>
+              <textarea onchange="word_checker()" maxlength="" id="text-1" name="q" placeholder="Copy Paste the text here.." required></textarea>
                 </form>
+              <p id="ch">10000 Words Remaining</p>
           </div>        
           <div class="tab-pane fade" id="file-input-ws" role="tabpanel" aria-labelledby="file-tab">
             <form id="form2-ws" action="/filetest/" enctype="multipart/form-data" method="POST">
@@ -157,7 +158,7 @@
             {% endfor %}
       </div>
       <div class="col-md-6 result-2" style="text-align: center; align-items: center;">
-        <p class="output-per-tot">{{ percent }}%</p>
+        <p id="taru" class="output-per-tot">{{ percent }}%</p>
         <h3 style="font-family: Arial black, Helvetica, sans-serif;">Plagiarized Content</h3>
       </div>
       </div>
@@ -179,6 +180,21 @@
     function makeInvisible(){
       document.getElementById("submit-button-2").style.visibility = "hidden";
       document.getElementById("submit-button-1").style.visibility = "visible";
+    }
+
+    function word_checker(){
+      elem = document.getElementById("text-1");
+      var word = elem.value;
+      // number of words in the text
+      var num_words = word.split(/\s+/).length;
+      lenght_of_word = word.length;
+      if(num_words > 10000){
+        alert("You have exceeded the word limit. Please enter a text less than 10000 words.");
+        elem.value = "";
+      }
+      else{
+        document.getElementById("ch").innerHTML = 10000 - num_words + " Words Remaining";
+      }
     }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
